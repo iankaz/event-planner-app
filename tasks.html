@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tasks - Event Planner App</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <h1>Event Planner</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="create-event.html">Create Event</a></li>
+        <li><a href="guest-list.html">Guest List</a></li>
+        <li><a href="tasks.html">Tasks</a></li>
+        <li><a href="calender.html">Calendar</a></li>
+      </ul>
+    </nav>
+  </header>
+  
+  <main>
+    <section id="tasks">
+      <h2>Task Management</h2>
+      <form id="task-form">
+        <label for="task-name">Task:</label>
+        <input type="text" id="task-name" name="task" required>
+
+        <label for="task-deadline">Deadline:</label>
+        <input type="date" id="task-deadline" name="deadline" required>
+
+        <button type="submit">Add Task</button>
+      </form>
+      <ul id="task-list">
+        <!-- Tasks will be rendered here -->
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2024 Event Planner App</p>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

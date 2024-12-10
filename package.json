@@ -8,5 +8,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "@sendgrid/mail": "^8.1.4",
+    "http-server": "^14.1.1"
+  }
 }

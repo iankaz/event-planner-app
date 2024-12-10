@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Event - Event Planner App</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <h1>Event Planner</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="createevent.html">Create Event</a></li>
+        <li><a href="guestlist.html">Guest List</a></li>
+        <li><a href="tasks.html">Tasks</a></li>
+        <li><a href="calender.html">Calendar</a></li>
+      </ul>
+    </nav>
+  </header>
+  
+  <main>
+    <section id="create-event">
+      <h2>Create New Event</h2>
+      <form id="event-form">
+        <label for="event-title">Title:</label>
+        <input type="text" id="event-title" name="title" required>
+
+        <label for="event-date">Date:</label>
+        <input type="date" id="event-date" name="date" required>
+
+        <label for="event-location">Location:</label>
+        <input type="text" id="event-location" name="location" required>
+
+        <button type="submit">Create Event</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2024 Event Planner App</p>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

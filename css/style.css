@@ -56,4 +56,8 @@ body {
   section#events h2 {
     margin-top: 0;
   }
+
+  pre#content {
+    white-space: pre-wrap;
+  }
   

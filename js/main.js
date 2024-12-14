@@ -210,16 +210,5 @@ function loadEvents() {
   return JSON.parse(localStorage.getItem('events')) || [];
 }
 
-// Function to save guest data to localStorage
-function saveGuest(guest) {
-  const guests = JSON.parse(localStorage.getItem('guests')) || [];
-  guests.push(guest);
-  localStorage.setItem('guests', JSON.stringify(guests));
-}
-
-// Function to load guest data from localStorage
-function loadGuests() {
-  return JSON.parse(localStorage.getItem('guests')) || [];
-}
 
   

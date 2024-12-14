@@ -197,18 +197,4 @@ sgMail
   
     renderExpenses(expenses);
   });
-
-  // Function to save event data to localStorage
-function saveEvent(event) {
-  const events = JSON.parse(localStorage.getItem('events')) || [];
-  events.push(event);
-  localStorage.setItem('events', JSON.stringify(events));
-}
-
-// Function to load event data from localStorage
-function loadEvents() {
-  return JSON.parse(localStorage.getItem('events')) || [];
-}
-
-
   

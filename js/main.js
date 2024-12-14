@@ -1,124 +1,113 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const eventList = document.getElementById('event-list');
-    const mockEvents = [
-      { title: 'Birthday Party', date: '2024-12-20', location: '123 Party Lane' },
-      { title: 'Conference', date: '2024-12-25', location: '456 Conference Center' },
-    ];
-  
-    function renderEvents(events) {
-      eventList.innerHTML = events.map(event => `
-        <li>
-          <h3>${event.title}</h3>
-          <p>Date: ${event.date}</p>
-          <p>Location: ${event.location}</p>
-        </li>
-      `).join('');
-    }
-  
-    renderEvents(mockEvents);
+  const currentPath = window.location.pathname;
+
+  if (currentPath.endsWith('index.html') || currentPath === '/') {
+    handleHomePage();
+  } else if (currentPath.endsWith('createevent.html')) {
+    handleCreateEventPage();
+  } else if (currentPath.endsWith('guestlist.html')) {
+    handleGuestListPage();
+  } else if (currentPath.endsWith('tasks.html')) {
+    handleTasksPage();
+  }
+});
+
+function handleHomePage() {
+  const eventList = document.getElementById('event-list');
+  const storedEvents = JSON.parse(localStorage.getItem('events')) || [];
+  const mockEvents = [
+    { title: 'Birthday Party', date: '2024-12-20', location: '123 Party Lane' },
+    { title: 'Conference', date: '2024-12-25', location: '456 Conference Center' },
+  ];
+  const events = [...storedEvents, ...mockEvents];
+
+  function renderEvents(events) {
+    eventList.innerHTML = events.map(event => `
+      <li>
+        <h3>${event.title}</h3>
+        <p>Date: ${event.date}</p>
+        <p>Location: ${event.location}</p>
+      </li>
+    `).join('');
+  }
+
+  renderEvents(events);
+}
+
+function handleCreateEventPage() {
+  const eventForm = document.getElementById('event-form');
+  const storedEvents = JSON.parse(localStorage.getItem('events')) || [];
+  const eventList = [...storedEvents];
+
+  eventForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const title = document.getElementById('event-title').value;
+    const date = document.getElementById('event-date').value;
+    const location = document.getElementById('event-location').value;
+    const newEvent = { title, date, location };
+    eventList.push(newEvent);
+    localStorage.setItem('events', JSON.stringify(eventList));
+    alert(`Event Created: ${title} on ${date} at ${location}`);
+    eventForm.reset();
+  });
+}
+
+function handleGuestListPage() {
+  const guestForm = document.getElementById('guest-form');
+  const guestListUl = document.getElementById('guest-list-ul');
+  const storedGuests = JSON.parse(localStorage.getItem('guestList')) || [];
+  const guestList = [...storedGuests];
+
+  function renderGuestList(guests) {
+    guestListUl.innerHTML = guests.map(guest => `
+      <li>
+        <p>Name: ${guest.name}</p>
+        <p>Email: ${guest.email}</p>
+      </li>
+    `).join('');
+  }
+
+  guestForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = document.getElementById('guest-name').value;
+    const email = document.getElementById('guest-email').value;
+    const newGuest = { name, email };
+    guestList.push(newGuest);
+    localStorage.setItem('guestList', JSON.stringify(guestList));
+    renderGuestList(guestList);
+    guestForm.reset();
   });
 
-  document.addEventListener('DOMContentLoaded', () => {
-    const currentPath = window.location.pathname;
-  
-    if (currentPath.endsWith('index.html') || currentPath === '/') {
-      handleHomePage();
-    } else if (currentPath.endsWith('createevent.html')) {
-      handleCreateEventPage();
-    } else if (currentPath.endsWith('guestlist.html')) {
-      handleGuestListPage();
-    } else if (currentPath.endsWith('tasks.html')) {
-      handleTasksPage();
-    }
-  });
-  
-  function handleHomePage() {
-    const eventList = document.getElementById('event-list');
-    const mockEvents = [
-      { title: 'Birthday Party', date: '2024-12-20', location: '123 Party Lane' },
-      { title: 'Conference', date: '2024-12-25', location: '456 Conference Center' },
-    ];
-  
-    function renderEvents(events) {
-      eventList.innerHTML = events.map(event => `
-        <li>
-          <h3>${event.title}</h3>
-          <p>Date: ${event.date}</p>
-          <p>Location: ${event.location}</p>
-        </li>
-      `).join('');
-    }
-  
-    renderEvents(mockEvents);
+  renderGuestList(guestList);
+}
+
+function handleTasksPage() {
+  const taskForm = document.getElementById('task-form');
+  const taskList = document.getElementById('task-list');
+  const tasks = [];
+
+  function renderTasks(tasks) {
+    taskList.innerHTML = tasks.map(task => `
+      <li>
+        <p>Task: ${task.name}</p>
+        <p>Deadline: ${task.deadline}</p>
+      </li>
+    `).join('');
   }
-  
-  function handleCreateEventPage() {
-    const eventForm = document.getElementById('event-form');
-    eventForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const title = document.getElementById('event-title').value;
-      const date = document.getElementById('event-date').value;
-      const location = document.getElementById('event-location').value;
-      const newEvent = { title, date, location };
-      // Save the event data (mock implementation here)
-      alert(`Event Created: ${title} on ${date} at ${location}`);
-      eventForm.reset();
-    });
-  }
-  
-  function handleGuestListPage() {
-    const guestForm = document.getElementById('guest-form');
-    const guestListUl = document.getElementById('guest-list-ul');
-    const guestList = [];
-  
-    function renderGuestList(guests) {
-      guestListUl.innerHTML = guests.map(guest => `
-        <li>
-          <p>Name: ${guest.name}</p>
-          <p>Email: ${guest.email}</p>
-        </li>
-      `).join('');
-    }
-  
-    guestForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const name = document.getElementById('guest-name').value;
-      const email = document.getElementById('guest-email').value;
-      const newGuest = { name, email };
-      guestList.push(newGuest);
-      renderGuestList(guestList);
-      guestForm.reset();
-    });
-  
-    renderGuestList(guestList);
-  }
-  
-  function handleTasksPage() {
-    const taskForm = document.getElementById('task-form');
-    const taskList = document.getElementById('task-list');
-    const tasks = [];
-  
-    function renderTasks(tasks) {
-      taskList.innerHTML = tasks.map(task => `
-        <li>
-          <p>Task: ${task.name}</p>
-          <p>Deadline: ${task.deadline}</p>
-        </li>
-      `).join('');
-    }
-  
-    taskForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const name = document.getElementById('task-name').value;
-      const deadline = document.getElementById('task-deadline').value;
-      const newTask = { name, deadline };
-      tasks.push(newTask);
-      renderTasks(tasks);
-      taskForm.reset();
-    });
-  
+
+  taskForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = document.getElementById('task-name').value;
+    const deadline = document.getElementById('task-deadline').value;
+    const newTask = { name, deadline };
+    tasks.push(newTask);
     renderTasks(tasks);
-  }
+    taskForm.reset();
+  });
+
+  renderTasks(tasks);
+}
+
 
   // Placeholder code for Google Calendar API integration
 function loadGoogleCalendar() {
@@ -197,4 +186,29 @@ sgMail
   
     renderExpenses(expenses);
   });
+
+  // Function to save event data to localStorage
+function saveEvent(event) {
+  const events = JSON.parse(localStorage.getItem('events')) || [];
+  events.push(event);
+  localStorage.setItem('events', JSON.stringify(events));
+}
+
+// Function to load event data from localStorage
+function loadEvents() {
+  return JSON.parse(localStorage.getItem('events')) || [];
+}
+
+// Function to save guest data to localStorage
+function saveGuest(guest) {
+  const guests = JSON.parse(localStorage.getItem('guests')) || [];
+  guests.push(guest);
+  localStorage.setItem('guests', JSON.stringify(guests));
+}
+
+// Function to load guest data from localStorage
+function loadGuests() {
+  return JSON.parse(localStorage.getItem('guests')) || [];
+}
+
   

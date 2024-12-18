@@ -35,22 +35,53 @@ function handleHomePage() {
   renderEvents(events);
 }
 
+let currentEventGuests = [];
+
 function handleCreateEventPage() {
   const eventForm = document.getElementById('event-form');
+  const guestForm = document.getElementById('guest-form');
+  const guestListUl = document.getElementById('guest-list-ul');
+
   eventForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const title = document.getElementById('event-title').value;
     const date = document.getElementById('event-date').value;
     const location = document.getElementById('event-location').value;
-    const newEvent = { title, date, location, guests: [], tasks: [] };
+    const newEvent = { title, date, location, guests: currentEventGuests, tasks: [] };
 
     let events = JSON.parse(localStorage.getItem('events')) || [];
     events.push(newEvent);
-    localStorage.setItem('events', JSON.stringify(events));
+    try {
+      localStorage.setItem('events', JSON.stringify(events));
+      console.log('Events saved:', events);
+    } catch (error) {
+      console.error('Error saving events:', error);
+    }
 
     alert(`Event Created: ${title} on ${date} at ${location}`);
     eventForm.reset();
+    currentEventGuests = []; // Reset the guest list for the next event
+    guestListUl.innerHTML = ''; // Clear the displayed guest list
   });
+
+  guestForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = document.getElementById('guest-name').value;
+    const email = document.getElementById('guest-email').value;
+    const newGuest = { name, email };
+    currentEventGuests.push(newGuest);
+    renderGuestList(currentEventGuests);
+    guestForm.reset();
+  });
+
+  function renderGuestList(guests) {
+    guestListUl.innerHTML = guests.map(guest => `
+      <li>
+        <p>Name: ${guest.name}</p>
+        <p>Email: ${guest.email}</p>
+      </li>
+    `).join('');
+  }
 }
 
 function handleGuestListPage() {
@@ -158,7 +189,7 @@ function sendEmailNotification(guest) {
   fetch('https://api.sendgrid.com/v3/mail/send', {
     method: 'POST',
     headers: {
-      'Authorization': `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`,
+      'Authorization': `Bearer YOUR_SENDGRID_API_KEY`,
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(emailData),

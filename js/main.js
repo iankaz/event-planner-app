@@ -17,8 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
 function handleHomePage() {
   const eventList = document.getElementById('event-list');
   const events = JSON.parse(localStorage.getItem('events')) || [
-    { title: 'Birthday Party', date: '2024-12-20', location: '123 Party Lane', guests: [], tasks: [] },
-    { title: 'Conference', date: '2024-12-25', location: '456 Conference Center', guests: [], tasks: [] },
+    { title: 'Birthday Party', date: '2024-12-20', location: '123 Party Lane', guests: [], tasks: [], comments: [] },
+    { title: 'Conference', date: '2024-12-25', location: '456 Conference Center', guests: [], tasks: [], comments: [] },
   ];
 
   function renderEvents(events) {
@@ -28,6 +28,7 @@ function handleHomePage() {
         <p>Date: ${event.date}</p>
         <p>Location: ${event.location}</p>
         <button onclick="viewEventDetails(${index})">View Details</button>
+        <button onclick="deleteEvent(${index})">Delete</button>
       </li>
     `).join('');
   }
@@ -47,7 +48,7 @@ function handleCreateEventPage() {
     const title = document.getElementById('event-title').value;
     const date = document.getElementById('event-date').value;
     const location = document.getElementById('event-location').value;
-    const newEvent = { title, date, location, guests: currentEventGuests, tasks: [] };
+    const newEvent = { title, date, location, guests: currentEventGuests, tasks: [], comments: [] };
 
     let events = JSON.parse(localStorage.getItem('events')) || [];
     events.push(newEvent);
@@ -205,7 +206,22 @@ function sendEmailNotification(guest) {
   });
 }
 
-// Function to view event details (guests and tasks) of a specific event
+// Function to delete an event
+function deleteEvent(eventIndex) {
+  let events = JSON.parse(localStorage.getItem('events')) || [];
+  events.splice(eventIndex, 1);
+  localStorage.setItem('events', JSON.stringify(events));
+  handleHomePage(); // Re-render the home page to reflect the deletion
+}
+
+// Function to add a comment to an event
+function addComment(eventIndex, comment) {
+  let events = JSON.parse(localStorage.getItem('events')) || [];
+  events[eventIndex].comments.push(comment);
+  localStorage.setItem('events', JSON.stringify(events));
+}
+
+// Function to view event details (guests, tasks, comments) of a specific event
 function viewEventDetails(eventIndex) {
   localStorage.setItem('currentEventIndex', eventIndex);
   window.location.href = 'eventdetails.html';

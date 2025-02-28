@@ -226,3 +226,104 @@ function viewEventDetails(eventIndex) {
   localStorage.setItem('currentEventIndex', eventIndex);
   window.location.href = 'eventdetails.html';
 }
+
+// Event class to create event objects
+class Event {
+    constructor(id, title, date, category, description) {
+        this.id = id;
+        this.title = title;
+        this.date = date;
+        this.category = category;
+        this.description = description;
+    }
+}
+
+// EventManager class to handle all event operations
+class EventManager {
+    constructor() {
+        this.events = JSON.parse(localStorage.getItem('events')) || [];
+        this.loadEvents();
+        this.setupEventListeners();
+    }
+
+    loadEvents() {
+        const eventList = document.getElementById('event-list');
+        if (!eventList) return;
+
+        eventList.innerHTML = '';
+        this.events.forEach(event => {
+            const li = this.createEventElement(event);
+            eventList.appendChild(li);
+        });
+    }
+
+    createEventElement(event) {
+        const li = document.createElement('li');
+        li.className = 'event-item';
+        li.innerHTML = `
+            <h3>${event.title}</h3>
+            <p>Date: ${new Date(event.date).toLocaleDateString()}</p>
+            <p>Category: ${event.category}</p>
+            <p>${event.description}</p>
+            <button onclick="eventManager.deleteEvent('${event.id}')">Delete</button>
+        `;
+        return li;
+    }
+
+    addEvent(title, date, category, description) {
+        const event = new Event(
+            Date.now().toString(),
+            title,
+            date,
+            category,
+            description
+        );
+        this.events.push(event);
+        this.saveEvents();
+        this.loadEvents();
+    }
+
+    deleteEvent(id) {
+        this.events = this.events.filter(event => event.id !== id);
+        this.saveEvents();
+        this.loadEvents();
+    }
+
+    saveEvents() {
+        localStorage.setItem('events', JSON.stringify(this.events));
+    }
+
+    setupEventListeners() {
+        const searchInput = document.getElementById('search-events');
+        const categoryFilter = document.getElementById('filter-category');
+
+        if (searchInput) {
+            searchInput.addEventListener('input', () => this.filterEvents());
+        }
+
+        if (categoryFilter) {
+            categoryFilter.addEventListener('change', () => this.filterEvents());
+        }
+    }
+
+    filterEvents() {
+        const searchTerm = document.getElementById('search-events').value.toLowerCase();
+        const category = document.getElementById('filter-category').value;
+
+        const filteredEvents = this.events.filter(event => {
+            const matchesSearch = event.title.toLowerCase().includes(searchTerm);
+            const matchesCategory = !category || event.category === category;
+            return matchesSearch && matchesCategory;
+        });
+
+        const eventList = document.getElementById('event-list');
+        eventList.innerHTML = '';
+        filteredEvents.forEach(event => {
+            const li = this.createEventElement(event);
+            eventList.appendChild(li);
+        });
+    }
+}
+
+// Initialize the event manager
+const eventManager = new EventManager();

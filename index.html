@@ -15,16 +15,24 @@
         <li><a href="createevent.html">Create Event</a></li>
         <li><a href="guestlist.html">Guest List</a></li>
         <li><a href="tasks.html">Tasks</a></li>
-        <li><a href="calender.html">Calendar</a></li>
+        <li><a href="calendar.html">Calendar</a></li>
       </ul>
     </nav>
   </header>
   <main>
-    <section id="events">
+    <section id="events" aria-label="Events section">
       <h2>Upcoming Events</h2>
-      <ul id="event-list">
-        <!-- Mock event data will go here -->
-      </ul>
+      <div class="event-filters" role="search" aria-label="Event filters">
+        <input type="text" id="search-events" placeholder="Search events..." aria-label="Search events">
+        <label for="filter-category">Filter by category:</label>
+        <select id="filter-category" aria-label="Filter events by category">
+          <option value="">All Categories</option>
+          <option value="meeting">Meeting</option>
+          <option value="party">Party</option>
+          <option value="conference">Conference</option>
+        </select>
+      </div>
+      <ul id="event-list" role="list" aria-label="Event list"></ul>
     </section>
   </main>
   <footer>

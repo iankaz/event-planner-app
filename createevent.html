@@ -1,63 +1,56 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Create Event - Event Planner App</title>
-  <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Event - Planner Pro</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <header>
-    <h1>Event Planner</h1>
-    <nav>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="createevent.html">Create Event</a></li>
-        <li><a href="guestlist.html">Guest List</a></li>
-        <li><a href="tasks.html">Tasks</a></li>
-        <li><a href="calender.html">Calendar</a></li>
-      </ul>
-    </nav>
-  </header>
-  
-  <main>
-    <section id="create-event">
-      <h2>Create Event</h2>
-      <form id="event-form">
-        <label for="event-title">Title:</label>
-        <input type="text" id="event-title" name="title" required>
-
-        <label for="event-date">Date:</label>
-        <input type="date" id="event-date" name="date" required>
-
-        <label for="event-location">Location:</label>
-        <input type="text" id="event-location" name="location" required>
-
-        <button type="submit">Create Event</button>
-      </form>
-
-      <section id="add-guest">
-        <h3>Add Guests</h3>
-        <form id="guest-form">
-          <label for="guest-name">Name:</label>
-          <input type="text" id="guest-name" name="name" required>
-
-          <label for="guest-email">Email:</label>
-          <input type="email" id="guest-email" name="email" required>
-
-          <button type="submit">Add Guest</button>
-        </form>
-        <ul id="guest-list-ul">
-          <!-- Guest list will be rendered here -->
-        </ul>
-      </section>
-    </section>
-  </main>
-
-  <footer>
-    <p>&copy; 2024 Event Planner App</p>
-  </footer>
-
-  <script src="js/main.js"></script>
+    <header>
+        <h1>Planner Pro App</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="createevent.html">Create Event</a></li>
+                <li><a href="guestlist.html">Guest List</a></li>
+                <li><a href="tasks.html">Tasks</a></li>
+                <li><a href="calendar.html">Calendar</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="create-event" aria-label="Create event section">
+            <h2>Create New Event</h2>
+            <form id="create-event-form" class="form-group" aria-label="Create event form">
+                <div class="form-row">
+                    <label for="event-title">Event Title:</label>
+                    <input type="text" id="event-title" required>
+                </div>
+                <div class="form-row">
+                    <label for="event-date">Date:</label>
+                    <input type="datetime-local" id="event-date" required>
+                </div>
+                <div class="form-row">
+                    <label for="event-category">Category:</label>
+                    <select id="event-category" required>
+                        <option value="meeting">Meeting</option>
+                        <option value="party">Party</option>
+                        <option value="conference">Conference</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <label for="event-description">Description:</label>
+                    <textarea id="event-description" rows="4"></textarea>
+                </div>
+                <button type="submit" aria-label="Create event">Create Event</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Planner Pro App</p>
+    </footer>
+    <script src="js/main.js"></script>
+    <script src="js/createevent.js"></script>
 </body>
 </html>

@@ -1,47 +1,74 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tasks - Event Planner App</title>
-  <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tasks - Planner Pro</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <header>
-    <h1>Event Planner</h1>
-    <nav>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="create-event.html">Create Event</a></li>
-        <li><a href="guest-list.html">Guest List</a></li>
-        <li><a href="tasks.html">Tasks</a></li>
-        <li><a href="calender.html">Calendar</a></li>
-      </ul>
-    </nav>
-  </header>
-  
-  <main>
-    <section id="tasks">
-      <h2>Task Management</h2>
-      <form id="task-form">
-        <label for="task-name">Task:</label>
-        <input type="text" id="task-name" name="task" required>
-
-        <label for="task-deadline">Deadline:</label>
-        <input type="date" id="task-deadline" name="deadline" required>
-
-        <button type="submit">Add Task</button>
-      </form>
-      <ul id="task-list">
-        <!-- Tasks will be rendered here -->
-      </ul>
-    </section>
-  </main>
-
-  <footer>
-    <p>&copy; 2024 Event Planner App</p>
-  </footer>
-
-  <script src="js/main.js"></script>
+    <header>
+        <h1>Planner Pro App</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="createevent.html">Create Event</a></li>
+                <li><a href="guestlist.html">Guest List</a></li>
+                <li><a href="tasks.html">Tasks</a></li>
+                <li><a href="calendar.html">Calendar</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="task-management">
+            <h2>Task Management</h2>
+            <form id="task-form" class="form-group">
+                <div class="form-row">
+                    <label for="task-name">Task Name:</label>
+                    <input type="text" id="task-name" required>
+                </div>
+                <div class="form-row">
+                    <label for="task-description">Description:</label>
+                    <textarea id="task-description" rows="3"></textarea>
+                </div>
+                <div class="form-row">
+                    <label for="task-deadline">Deadline:</label>
+                    <input type="datetime-local" id="task-deadline" required>
+                </div>
+                <div class="form-row">
+                    <label for="task-assignee">Assign To:</label>
+                    <input type="text" id="task-assignee">
+                </div>
+                <div class="form-row">
+                    <label for="task-priority">Priority:</label>
+                    <select id="task-priority" required>
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                </div>
+                <button type="submit">Add Task</button>
+            </form>
+            
+            <div class="task-list-container">
+                <h3>Tasks</h3>
+                <div class="task-filters">
+                    <label for="priority-filter">Filter by priority:</label>
+                    <select id="priority-filter">
+                        <option value="all">All Tasks</option>
+                        <option value="low">Low Priority</option>
+                        <option value="medium">Medium Priority</option>
+                        <option value="high">High Priority</option>
+                    </select>
+                </div>
+                <ul id="task-list"></ul>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Planner Pro App</p>
+    </footer>
+    <script src="js/main.js"></script>
+    <script src="js/tasks.js"></script>
 </body>
 </html>

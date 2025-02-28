@@ -1,48 +1,66 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Guest List - Event Planner App</title>
-  <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guest List - Planner Pro</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <header>
-    <h1>Event Planner</h1>
-    <nav>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="createevent.html">Create Event</a></li>
-        <li><a href="guestlist.html">Guest List</a></li>
-        <li><a href="tasks.html">Tasks</a></li>
-        <li><a href="calender.html">Calendar</a></li>
-      </ul>
-    </nav>
-  </header>
-  
-  <main>
-    <section id="guest-list">
-      <h2>Guest List</h2>
-      <form id="guest-form">
-        <label for="guest-name">Name:</label>
-        <input type="text" id="guest-name" name="name" required>
-
-        <label for="guest-email">Email:</label>
-        <input type="email" id="guest-email" name="email" required>
-
-        <button type="submit">Add Guest</button>
-      </form>
-      <ul id="guest-list-ul">
-        <!-- Guest list will be rendered here -->
-      </ul>
-      <button onclick="window.location.href='index.html'">Back to Events</button>
-    </section>
-  </main>
-
-  <footer>
-    <p>&copy; 2024 Event Planner App</p>
-  </footer>
-
-  <script src="js/main.js"></script>
+    <header>
+        <h1>Planner Pro App</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="createevent.html">Create Event</a></li>
+                <li><a href="guestlist.html">Guest List</a></li>
+                <li><a href="tasks.html">Tasks</a></li>
+                <li><a href="calendar.html">Calendar</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="guest-management" aria-label="Guest management section">
+            <h2>Guest Management</h2>
+            <form id="guest-form" class="form-group" aria-label="Add guest form">
+                <div class="form-row">
+                    <label for="guest-name">Guest Name:</label>
+                    <input type="text" id="guest-name" required>
+                </div>
+                <div class="form-row">
+                    <label for="guest-email">Email:</label>
+                    <input type="email" id="guest-email" required>
+                </div>
+                <div class="form-row">
+                    <label for="guest-status">Status:</label>
+                    <select id="guest-status" required>
+                        <option value="pending">Pending</option>
+                        <option value="confirmed">Confirmed</option>
+                        <option value="declined">Declined</option>
+                    </select>
+                </div>
+                <button type="submit" aria-label="Add guest">Add Guest</button>
+            </form>
+            
+            <div class="guest-list-container">
+                <h3>Guest List</h3>
+                <div class="guest-filters" role="search" aria-label="Guest filters">
+                    <label for="status-filter">Filter by status:</label>
+                    <select id="status-filter" aria-label="Filter guests by status">
+                        <option value="all">All Guests</option>
+                        <option value="pending">Pending</option>
+                        <option value="confirmed">Confirmed</option>
+                        <option value="declined">Declined</option>
+                    </select>
+                </div>
+                <ul id="guest-list" role="list" aria-label="Guest list"></ul>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Planner Pro App</p>
+    </footer>
+    <script src="js/main.js"></script>
+    <script src="js/guestlist.js"></script>
 </body>
 </html>

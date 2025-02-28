@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar - Planner Pro</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script src="https://accounts.google.com/gsi/client"></script>
+</head>
+<body>
+    <header>
+        <h1>Planner Pro App</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="createevent.html">Create Event</a></li>
+                <li><a href="guestlist.html">Guest List</a></li>
+                <li><a href="tasks.html">Tasks</a></li>
+                <li><a href="calendar.html">Calendar</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="calendar-section" aria-label="Calendar section">
+            <h2>Calendar</h2>
+            <div class="calendar-controls" role="toolbar" aria-label="Calendar navigation">
+                <button id="authorize_button" class="auth-button" aria-label="Authorize Google Calendar access">
+                    Authorize Google Calendar
+                </button>
+                <button id="signout_button" class="auth-button" aria-label="Sign out of Google Calendar">
+                    Sign Out
+                </button>
+                <div class="view-controls" role="group" aria-label="Month navigation">
+                    <button id="prev-month" class="nav-button" aria-label="Previous month">
+                        Previous
+                    </button>
+                    <h3 id="current-month" aria-live="polite"></h3>
+                    <button id="next-month" class="nav-button" aria-label="Next month">
+                        Next
+                    </button>
+                </div>
+                <div class="view-selector" role="group" aria-label="Calendar view selection">
+                    <label for="calendar-view">Select view:</label>
+                    <select id="calendar-view">
+                        <option value="month">Month View</option>
+                        <option value="week">Week View</option>
+                        <option value="day">Day View</option>
+                    </select>
+                </div>
+            </div>
+            <div id="calendar-container" role="region" aria-label="Calendar content">
+                <div id="loading" role="status" aria-live="polite">Loading calendar...</div>
+                <div id="calendar-grid" role="grid" aria-label="Calendar grid"></div>
+            </div>
+            <div id="event-details" class="modal" role="dialog" aria-labelledby="event-details-title" aria-modal="true" hidden>
+                <div class="modal-content" role="document">
+                    <button type="button" class="close" aria-label="Close event details">&times;</button>
+                    <h3 id="event-details-title">Event Details</h3>
+                    <div id="event-info" role="region" aria-label="Event information"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Planner Pro App</p>
+    </footer>
+    <script src="js/calendar.js"></script>
+</body>
+</html> 
